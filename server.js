@@ -14,7 +14,6 @@ const app = express();
 const PORT = process.env.PORT;
 const APP = process.env.APP;
 const PASS = "My Password";
-const USER = "User name";
 
 app.get('/' , (req, res) => {
 	log("Application has been hit")
