@@ -4,16 +4,30 @@ const dotenv = require('dotenv');
 const env = process.argv[2] || "devolopment";
 dotenv.config({ path: '.env.${env}' });
 
+function log(message) {
+	const time = new Date().toISOString();
+	console.log( [${time}] [${env.toUpperCase()}] ${message}');
+}
+
 const app = express();
 
 const PORT = process.env.PORT;
 const APP = process.env.APP;
-	
+const PASS = "My Password";
+
 app.get('/' , (req, res) => {
-	res.send("Hello from NodeJs App" + APP);
+	log("Application has been hit")
+	res.send("Hello from " + APP);
 });
 
-app.listen(PORT, () => {
-	console.log("Server running on port " + PORT);
+app.get('/health' , (req, res) => {
+	log("Health check called");
+	res.status(200).json({
+		status: "UP"
+	});
+});
+
+app.listen( PORT , () => {
+	log("Server running on port " + PORT);
        
 });
